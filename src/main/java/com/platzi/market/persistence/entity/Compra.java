@@ -1,6 +1,7 @@
 package com.platzi.market.persistence.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,8 +10,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "compra")
+@Table(name = "compras")
 public class Compra {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compra")
@@ -18,10 +20,12 @@ public class Compra {
 
     @Column(name = "id_cliente")
     private String idCliente;
+
     private LocalDateTime fecha;
 
     @Column(name = "medio_pago")
     private String medioPago;
+
     private String comentario;
     private String estado;
 
