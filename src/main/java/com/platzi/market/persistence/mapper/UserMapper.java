@@ -18,6 +18,7 @@ public interface UserMapper {
             @Mapping(source = "contrasena", target = "password")
     })
     User toUser(Usuario usuario);
+
     List<User> toUsers(List<Usuario> usuarios);
 
     @InheritInverseConfiguration
