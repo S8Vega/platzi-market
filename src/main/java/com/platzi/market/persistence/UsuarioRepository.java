@@ -5,7 +5,9 @@ import com.platzi.market.domain.repository.UserRepository;
 import com.platzi.market.persistence.crud.UsuarioCrudRepository;
 import com.platzi.market.persistence.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UsuarioRepository implements UserRepository {
 
     @Autowired
