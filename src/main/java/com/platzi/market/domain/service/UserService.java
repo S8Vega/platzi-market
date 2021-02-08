@@ -18,7 +18,7 @@ public class UserService {
         return userRepository.getByUsernameAndPassword(username, password);
     }
 
-    public User save(User user){
+    public User save(User user) {
         return userRepository.save(user);
     }
 }
