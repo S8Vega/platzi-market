@@ -19,6 +19,7 @@ public class UserService {
     }
 
     public User save(User user) {
+        user.setPassword(Integer.toString(user.getPassword().hashCode()));
         return userRepository.save(user);
     }
 }
