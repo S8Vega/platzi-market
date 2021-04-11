@@ -1,6 +1,6 @@
 package com.platzi.market.web.security;
 
-import com.platzi.market.domain.service.PlatziUserDetailsService;
+import com.platzi.market.domain.service.UserService;
 import com.platzi.market.web.security.filter.JwtFilterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,19 +17,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private PlatziUserDetailsService platziUserDetailsService;
+    private UserService userService;
 
     @Autowired
     private JwtFilterRequest jwtFilterRequest;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(platziUserDetailsService);
+        auth.userDetailsService(userService);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/**/authenticate").permitAll()
+        http.csrf().disable().authorizeRequests().antMatchers("/**/login").permitAll()
                 .anyRequest().authenticated().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 

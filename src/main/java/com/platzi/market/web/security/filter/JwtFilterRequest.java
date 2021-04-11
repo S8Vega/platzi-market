@@ -1,6 +1,6 @@
 package com.platzi.market.web.security.filter;
 
-import com.platzi.market.domain.service.PlatziUserDetailsService;
+import com.platzi.market.domain.service.UserService;
 import com.platzi.market.web.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,7 +23,7 @@ public class JwtFilterRequest extends OncePerRequestFilter {
     private JWTUtil jwtUtil;
 
     @Autowired
-    private PlatziUserDetailsService platziUserDetailsService;
+    private UserService userService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -34,7 +34,7 @@ public class JwtFilterRequest extends OncePerRequestFilter {
             String username = jwtUtil.extractUsername(jwt);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = platziUserDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = userService.loadUserByUsername(username);
 
                 if (jwtUtil.validateToken(jwt, userDetails)) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
